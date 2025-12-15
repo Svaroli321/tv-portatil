@@ -1,0 +1,628 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <title>Caixa de Som Bluetooth JBL | TikTokShop</title>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
+  <style>
+    /* ——————————— MOBILE‑FIRST, SEM FRAMEWORKS ——————————— */
+    :root{
+      --bg:#ffffff;--text:#111827;--muted:#6b7280;--line:#e5e7eb;--card:#ffffff;--shadow:0 6px 20px rgba(17,24,39,.08);
+      --brand:#f5506d;--brand-600:#e11d48;--accent:#111827;--yellow:#f59e0b;--badge:#F87416
+    }
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    html,body{
+      height:100%;
+      overflow-x: hidden;
+    }
+    body{
+      margin:0;
+      background:var(--bg);
+      color:var(--text);
+      font-family: system-ui, -apple-system, Segoe UI, Roboto, Ubuntu, Cantarell, Noto Sans, Helvetica, Arial, sans-serif;
+      font-size: 15px;
+      line-height: 1.45;
+      padding-bottom: 70px;
+    }
+    .container{
+      width:100%;
+      max-width:640px;
+      margin:0 auto;
+      padding:0 12px
+    }
+    .hidden{display:none}
+    .card{
+      background:var(--card);
+      border:1px solid var(--line);
+      border-radius:14px;
+      box-shadow:var(--shadow)
+    }
+    .btn{
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      height:44px;
+      border-radius:8px;
+      font-weight:800;
+      border: none;
+      text-decoration: none;
+    }
+    .btn-primary{
+      background:var(--brand);
+      color:#fff;
+      font-size: 14px;
+    }
+    .btn-primary:active{
+      transform:translateY(1px);
+      background: var(--brand-600);
+    }
+    .row{
+      display:flex;
+      gap:10px;
+      align-items:center
+    }
+    .space{height:10px}
+    .divider{
+      height:8px;
+      background:#f3f4f6;
+      margin:16px 0
+    }
+
+    /* Header */
+    header{
+      position:sticky;
+      top:0;
+      z-index:50;
+      background:#fff;
+      border-bottom:1px solid var(--line)
+    }
+    header .bar{
+      height:52px;
+      display:flex;
+      align-items:center;
+      justify-content:space-between
+    }
+    header .icon{
+      width:40px;
+      height:40px;
+      border-radius:999px;
+      background:#f3f4f6;
+      display:grid;
+      place-items:center
+    }
+
+    /* Galeria */
+    .hero{
+      position:relative;
+      border-radius:16px;
+      overflow:hidden;
+      background:#f8fafc;
+      height:56vh;
+      min-height:300px
+    }
+    .hero img{
+      width:100%;
+      height:100%;
+      object-fit:contain
+    }
+    .dots{
+      position:absolute;
+      left:50%;
+      bottom:10px;
+      transform:translateX(-50%);
+      display:flex;
+      gap:6px
+    }
+    .dot{
+      width:6px;
+      height:6px;
+      border-radius:999px;
+      background:#e5e7eb
+    }
+    .dot.active{background:#111827}
+
+    /* Preço / Oferta */
+    .badge{
+      background:var(--badge);
+      color:#fff;
+      border-radius:12px 12px 0 0;
+      padding:14px
+    }
+    .badge h3{
+      margin:0;
+      font-size:24px
+    }
+    .badge small{opacity:.95}
+    .price-card{padding:14px}
+    .rating i{color:var(--yellow)}
+    .chips{
+      display:flex;
+      flex-wrap:wrap;
+      gap:8px
+    }
+    .chip{
+      border:1px solid var(--line);
+      border-radius:10px;
+      padding:7px 10px;
+      color:#374151;
+      font-weight:600;
+      font-size:13px
+    }
+
+    /* Selo linha scroll - AGORA UM ABAIXO DO OUTRO */
+    .trust-items{
+      display:flex;
+      flex-direction:column;
+      gap:10px
+    }
+    .trust-item{
+      display:flex;
+      gap:10px;
+      padding:12px;
+      border:1px solid var(--line);
+      border-radius:12px;
+      background:#fff
+    }
+    .trust-item i{font-size:18px}
+
+    /* Reviews */
+    .review{padding:14px}
+    .review header{position:static;border:0}
+    .avatar{
+      width:42px;
+      height:42px;
+      border-radius:999px;
+      object-fit:cover
+    }
+    .review-images{
+      display:flex;
+      gap:8px;
+      margin-top:12px;
+      overflow-x:auto;
+      padding-bottom:8px
+    }
+    .review-image{
+      width:80px;
+      height:80px;
+      border-radius:8px;
+      object-fit:cover;
+      flex-shrink:0
+    }
+
+    /* Descrição / Prosa */
+    .prose h2{margin:0 0 8px 0}
+    .prose h3{margin:14px 0 6px 0;font-size:16px}
+    .prose p{margin:0 0 8px 0;color:#374151}
+
+    /* FAQ */
+    details{
+      border:1px solid var(--line);
+      border-radius:12px
+    }
+    summary{
+      padding:14px;
+      cursor:pointer;
+      font-weight:700
+    }
+    details>div{
+      padding:0 14px 14px 14px;
+      color:#374151
+    }
+
+    /* BOTÃO FIXO - CORRIGIDO PARA NÃO SAIR DA TELA */
+    .dock{
+      position: fixed;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      z-index: 1000;
+      background: white;
+      border-top: 1px solid #e5e7eb;
+      padding: 8px 12px;
+      box-shadow: 0 -2px 10px rgba(0,0,0,0.1);
+    }
+    .dock-container{
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      max-width: 640px;
+      margin: 0 auto;
+      gap: 8px;
+    }
+    .dock-options{
+      display: flex;
+      flex: 1;
+      gap: 0;
+      min-width: 0;
+    }
+    .dock-option{
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 4px 6px;
+      color: #6b7280;
+      font-size: 10px;
+      font-weight: 600;
+      text-decoration: none;
+      flex: 1;
+      min-width: 0;
+    }
+    .dock-option i{
+      font-size: 16px;
+      margin-bottom: 2px;
+    }
+    .dock-option.active{
+      color: var(--brand);
+    }
+    .dock-option span{
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      max-width: 100%;
+      text-align: center;
+    }
+    .dock .btn{
+      height: 40px;
+      min-width: 110px;
+      font-size: 13px;
+      flex-shrink: 0;
+      padding: 0 12px;
+    }
+
+    /* Botão seguir */
+    .follow-btn{
+      background:#f5506d;
+      color:white;
+      border:none;
+      border-radius:8px;
+      padding:6px 12px;
+      font-size:12px;
+      font-weight:600;
+      cursor:pointer
+    }
+
+    /* Desktop (aperfeiçoa grid) */
+    @media (min-width:768px){
+      .grid-2{
+        display:grid;
+        grid-template-columns:1fr 1fr;
+        gap:14px
+      }
+      .hero{height:48vh}
+    }
+
+    /* Mobile específico */
+    @media (max-width: 480px) {
+      .container {
+        padding: 0 10px;
+      }
+      .dock {
+        padding: 6px 10px;
+      }
+      .dock-option {
+        padding: 4px 4px;
+        font-size: 9px;
+      }
+      .dock-option i {
+        font-size: 14px;
+      }
+      .dock .btn {
+        min-width: 100px;
+        font-size: 12px;
+        height: 38px;
+      }
+    }
+
+    /* Ajustes para telas muito pequenas */
+    @media (max-width: 360px) {
+      .dock-option span {
+        font-size: 8px;
+      }
+      .dock .btn {
+        min-width: 90px;
+        font-size: 11px;
+        height: 36px;
+      }
+      .dock-container {
+        gap: 6px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- HEADER -->
+  <header>
+    <div class="container bar">
+      <div class="row">
+        <span class="icon" aria-label="Voltar"><i class="fa-solid fa-chevron-left"></i></span>
+        <small style="color:var(--muted)">Loja › Áudio › TV</small>
+      </div>
+      <div class="row">
+        <span class="icon"><i class="fa-solid fa-share-nodes"></i></span>
+        <span class="icon"><i class="fa-solid fa-cart-shopping"></i></span>
+        <span class="icon"><i class="fa-solid fa-ellipsis"></i></span>
+      </div>
+    </div>
+  </header>
+
+  <!-- HERO + PREÇO (MOBILE-FIRST empilhado) -->
+  <section class="container" style="padding:12px 12px 0 12px">
+    <div class="grid-2">
+      <!-- Galeria com slider -->
+      <div class="card hero" id="galeria">
+        <img id="hero" src="Gemini_Generated_Image_bjws5vbjws5vbjws.png" alt="JBL PartyBox"/>
+        <div class="dots">
+          <span class="dot active" data-index="0"></span>
+          <span class="dot" data-index="1"></span>
+          <span class="dot" data-index="2"></span>
+          <span class="dot" data-index="3"></span>
+          <span class="dot" data-index="4"></span>
+        </div>
+      </div>
+
+      <!-- Preço -->
+      <aside class="card" style="overflow:hidden">
+        <div class="badge">
+          <h3>R$ 197,90 <i class="fa-solid fa-gift"></i></h3>
+          <small>De <s>R$ 539,90</s> • Economize 88%</small>
+          <div class="row" style="margin-top:8px">
+            <small style="background:rgba(255,255,255,.2);padding:4px 8px;border-radius:8px">TERMINA EM <b id="timer">50:55</b></small>
+            <i class="fa-solid fa-circle" style="font-size:8px;opacity:.85"></i>
+          </div>
+        </div>
+        <div class="price-card">
+          <!-- CORREÇÃO: "Primo" para "Promo" -->
+          <h1 style="margin:0 0 6px 0;font:800 17px/1.2 system-ui">Promoção do Mês</h1>
+          <h2 style="margin:0 0 4px 0;font:700 16px/1.2 system-ui">TV Portátil de 22 Polegadas</h2>
+          <h3 style="margin:0 0 4px 0;font:600 15px/1.2 system-ui;color:#6b7280">com Tela Touchscreen (função tablet)</h3>
+          <h3 style="margin:0 0 12px 0;font:600 15px/1.2 system-ui;color:#6b7280">+ Sistema Android (função smart)</h3>
+          
+          <div class="row" style="color:#4b5563;font-weight:700">
+            <span class="rating">
+              <i class="fa-solid fa-star"></i>
+              <i class="fa-solid fa-star"></i>
+              <i class="fa-solid fa-star"></i>
+              <i class="fa-solid fa-star"></i>
+              <i class="fa-regular fa-star"></i>
+            </span>
+            <small><strong>4.7</strong> (207) • 4473 vendidos</small>
+          </div>
+          
+          <div class="space"></div>
+          
+          <div>
+            <h4 style="margin:0 0 6px 0;font:700 15px system-ui">Voltagem</h4>
+            <p style="margin:0 0 12px 0">127/220V</p>
+          </div>
+          
+          <div class="chips">
+            <span class="chip"><i class="fa-solid fa-bolt"></i> 127/220V</span>
+            <span class="chip"><i class="fa-solid fa-truck-fast"></i> Frete grátis</span>
+            <span class="chip"><i class="fa-solid fa-rotate-left"></i> Devolução 30d</span>
+          </div>
+          <div class="space"></div>
+          <a class="btn btn-primary" href="#comprar">COMPRAR AGORA</a>
+        </div>
+      </aside>
+    </div>
+  </section>
+
+  <div class="divider"></div>
+
+  <!-- SELINHOS UM ABAIXO DO OUTRO -->
+  <section class="container">
+    <div class="trust-items">
+      <div class="trust-item">
+        <i class="fa-solid fa-truck-fast" style="color:#16a34a"></i>
+        <div>
+          <b>Frete grátis</b><br>
+          <small class="muted">Entrega expressa em todo Brasil. Receba seu produto em até 15 dias úteis com código de rastreamento completo.</small>
+        </div>
+      </div>
+      <div class="trust-item">
+        <i class="fa-solid fa-rotate-left" style="color:#f59e0b"></i>
+        <div>
+          <b>Devolução grátis até 30 dias</b><br>
+          <small class="muted">Não gostou? Devolvemos seu dinheiro sem burocracia. Frete de retorno gratuito e reembolso rápido garantido.</small>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="divider"></div>
+
+  <!-- AVALIAÇÕES (compacto) - TODAS AS AVALIAÇÕES ADICIONADAS -->
+  <section class="container" id="reviews">
+    <div class="row" style="justify-content:space-between;margin-bottom:6px">
+      <h2 style="margin:0;font:800 18px system-ui">Avaliações dos clientes <span style="color:#6b7280;font-weight:600">(491)</span></h2>
+      <a href="#" style="font-weight:800;color:#2563eb;text-decoration:none">Ver todas</a>
+    </div>
+    
+    <!-- Carlos Silva -->
+    <article class="card review">
+      <div class="row" style="gap:12px">
+        <img class="avatar" src="Gemini_Generated_Image_bjws5vbjws5vbjws.png" alt="Carlos"/>
+        <div>
+          <b>Carlos Silva</b> <span class="rating"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i></span>
+          <div style="color:#9ca3af;font-weight:700;font-size:12px">São Paulo, SP</div>
+        </div>
+      </div>
+      <p style="margin:8px 0 0 0;color:#374151">Seja esportes, filmes ou tutoriais no YouTube, a imagem está sempre nítida e as cores sempre vibrantes. O sistema operacional Android embutido significa que posso instalar aplicativos diretamente na TV. Baixei alguns jogos, aplicativos de música e até alguns aplicativos de culinária que uso quando empurro a TV para a cozinha. O som era rico e preencheu o ambiente. Gosto de como é fácil trocar de canal. Também é leve e pode facilmente rolar da sala para o cômodo. Aprecio seu design elegante, que combina muito bem com a decoração da minha casa.</p>
+      <div class="review-images">
+        <img class="review-image" src="teste6.jpg" alt="Feedback 1">
+            <img class="review-image" src="teste12.jpg" alt="Feedback 7">
+       
+      </div>
+    </article>
+    
+    <div class="space"></div>
+    
+    <!-- Beatriz Lima -->
+    <article class="card review">
+      <div class="row" style="gap:12px">
+        <img class="avatar" src="https://tktkshopp.shop/wp-content/uploads/2025/11/review-profile-2-CPHO2E74.png" alt="Beatriz"/>
+        <div>
+          <b>Beatriz Lima</b> <span class="rating"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-regular fa-star"></i></span>
+          <div style="color:#9ca3af;font-weight:700;font-size:12px">Rio de Janeiro, RJ</div>
+        </div>
+      </div>
+      <p style="margin:8px 0 0 0;color:#374151">Comprei para assistir novelas  com as amigas no quintal, além de assistir filmes e séries durante o banho. Até agora, gostei. É muito fácil se mover no quintal. Consigo movê-lo com uma mão e pegar um pacote de cerveja com a outra. O som é alto o suficiente para ouvir musicas, embora seja melhor conectá-lo a um alto-falante. Conectei ao alto-falante Bose, e foi muito fácil. É ainda melhor do que o esperado para assistir filmes no banheiro. Meu banheiro é pequeno, então isso parece muito grande com o som preenchendo o quarto inteiro. Além disso, é muito fácil ajustar o ângulo da tela dependendo de como eu me deito na banheira. Também conecto um mouse Bluetooth nele, assim posso controlá-lo sem tocar na tela. Até agora, gosto da clareza, brilho, som, portabilidade e duração da massa (cerca de 4 a 5 horas).</p>
+      <div class="review-images">
+        <img class="review-image" src="teste7.jpg" alt="Feedback 3">
+        
+      </div>
+    </article>
+
+    <div class="space"></div>
+    
+    <!-- Pedro Raúl -->
+    <article class="card review">
+      <div class="row" style="gap:12px">
+        <img class="avatar" src="https://tktkshopp.shop/wp-content/uploads/2025/11/review-profile-3-DIYsgiJG.png" alt="Pedro"/>
+        <div>
+          <b>Pedro Raúl</b> <span class="rating"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i></span>
+          <div style="color:#9ca3af;font-weight:700;font-size:12px">Belo Horizonte, MG</div>
+        </div>
+      </div>
+      <p style="margin:8px 0 0 0;color:#374151">Esta é uma smart TV portátil muito versátil que pode ser útil e divertida de ter em casa.
+
+Veio embalado em segurança e sem danos. A instalação foi bem simples, meio que como montar um abajur de pé. Na base está a bateria e você só precisa passar o cabo de energia pelo centro das partes do poste para que a tela possa ser conectada em uma porta mais próxima do topo.
+
+Depois de montado, a configuração do software foi muito rápida – basta digitar as informações do seu wifi e ele inicia até a tela inicial. Existem muitos aplicativos de mídia pré-instalados, mas ele também vem com a Google Play Store para que você possa baixar qualquer aplicativo Android que quiser.</p>
+      <div class="review-images">
+        <img class="review-image" src="teste8.jpg" alt="Feedback 7">
+         <img class="review-image" src="teste11.jpg" alt="Feedback 7">
+      </div>
+    </article>
+
+    <div class="space"></div>
+    
+    <!-- Pietra Santos -->
+    <article class="card review">
+      <div class="row" style="gap:12px">
+        <img class="avatar" src="https://tktkshopp.shop/wp-content/uploads/2025/11/review-profile-new-4-CaSKJ7Oh.png" alt="Pietra"/>
+        <div>
+          <b>Pietra Santos</b> <span class="rating"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-regular fa-star"></i></span>
+          <div style="color:#9ca3af;font-weight:700;font-size:12px">Salvador, BA</div>
+        </div>
+      </div>
+      <p style="margin:8px 0 0 0;color:#374151">Produto com ótima qualidade, grave muito bom e bateria muito rigorosa.</p>
+      <div class="review-images">
+        <img class="review-image" src="teste5.jpg" alt="Feedback 9">
+       
+      </div>
+    </article>
+  </section>
+
+  <div class="divider"></div>
+
+  <!-- DESCRIÇÃO -->
+  <section class="container prose">
+    <div class="row" style="gap:10px;margin-bottom:8px;justify-content:space-between">
+      <div class="row" style="gap:10px">
+        <img src="teste3.jpg" alt="" style="width:40px;height:40px;object-fit:contain"/>
+        <div>
+          <b>TV portátil</b><br>
+          <small style="color:#9ca3af">207 produtos</small>
+        </div>
+      </div>
+      <button class="follow-btn">Seguir</button>
+    </div>
+    <div class="card" style="padding:14px">
+      <h2>Descrição do produto</h2>
+      <h3>Desbloqueie um Novo Estilo de Vida: A TV portátil BFSign de 32" é mais do que uma tela — traz uma nova forma de entretenimento e trabalho. Quando você está colocando os programas favoritos em dia, cozinhando receitas novas ou praticando yoga, a TV Stand by Me traz conveniência e alegria.</h3>
+      <h3>Suporta downloads de aplicativos: Alimentado pelo mais recente sistema operacional Android 13, 8GB de RAM e 128GB de armazenamento, a smart tv portátil BFSign baixa e roda aplicativos como Netflix, YouTube, TikTok, Disney+ e Zoom.</h3>
+       <h3>Projeção Sem Fio e Com Fio para Compartilhamento Fácil: Nossa tela inteligente móvel BFSign permite que você compartilhe facilmente seu conteúdo favorito do seu smartphone, tablet, notebook ou console de jogos via espelhamento de tela de TV sem fio, HDMl ou Bluetooth.</h3>
+        <h3>Hardware Poderoso & Experiência Premium: Possui resolução de 1920x1080 pixels para uma experiência visual em alta definição em uma TV Full HD touchscreen de 32 polegadas, além de som imersivo com alto-falantes HiFi 3D. A tela inteligente móvel dá vida ao seu conteúdo!</h3>
+
+      
+      <h4>TAMANHO DA TELA</h4>
+      <p>32 polegadas</p>
+      
+      <h4>Marca</h4>
+      <p>TBFSign</p>
+      
+      <h4>Resolução</h4>
+      <p>1080p</p>
+
+       <h4>Taxa de atualização</h4>
+      <p>60 Hz</p>
+
+         <h4>Destaque</h4>
+      <p>Portátil</p>
+
+       <h4>Tecnologia de Conectividade</h4>
+      <p>Bluetooth, HDMI, Usb C, Wi-Fi</p>
+
+       <h4>Tecnologia de Conectividade</h4>
+      <p>Bluetooth, HDMI, Usb C, Wi-Fi</p>
+    </div>
+  </section>
+
+  <!-- BOTÃO FIXO - CORRIGIDO PARA NÃO SAIR DA TELA -->
+  <nav class="dock">
+    <div class="dock-container">
+      <div class="dock-options">
+        <a href="#" class="dock-option">
+          <i class="fa-solid fa-store"></i>
+          <span>Loja</span>
+        </a>
+        <a href="#" class="dock-option">
+          <i class="fa-regular fa-comment"></i>
+          <span>Bater papo</span>
+        </a>
+        <a href="#reviews" class="dock-option active">
+          <i class="fa-regular fa-star"></i>
+          <span>Avaliações do produto</span>
+        </a>
+      </div>
+      <a id="comprar" class="btn btn-primary" href="#">COMPRAR AGORA</a>
+    </div>
+  </nav>
+
+  <script>
+    // Contagem regressiva (50:55)
+    (function(){
+      const el=document.getElementById('timer');if(!el) return;const end=Date.now()+(50*60+55)*1000;function t(){const s=Math.max(0,Math.floor((end-Date.now())/1000));const m=String(Math.floor(s/60)).padStart(2,'0');const r=String(s%60).padStart(2,'0');el.textContent=m+':'+r;if(s>0) requestAnimationFrame(t)}t()})();
+
+    // Galeria: slider com as 5 imagens
+    const imgs=[
+      'Gemini_Generated_Image_bjws5vbjws5vbjws.png',
+      'teste1.jpg',
+      'teste2.jpg',
+      'teste3.jpg',
+      'teste4.jpg'
+    ];
+    const hero=document.getElementById('hero');
+    const dots=document.querySelectorAll('.dot');
+    let i=0; 
+    
+    function set(n){
+      i=n;
+      hero.src=imgs[i];
+      dots.forEach((d,k)=>d.classList.toggle('active',k===i));
+    }
+    
+    // Trocar imagem ao clicar na galeria
+    document.getElementById('galeria').addEventListener('click',()=>set((i+1)%imgs.length));
+    
+    // Trocar imagem ao clicar nos dots
+    dots.forEach(dot => {
+      dot.addEventListener('click', (e) => {
+        e.stopPropagation();
+        set(parseInt(e.target.getAttribute('data-index')));
+      });
+    });
+    
+    // Auto-slide a cada 5 segundos
+    setInterval(() => set((i+1)%imgs.length), 5000);
+  </script>
+</body>
+</html>
